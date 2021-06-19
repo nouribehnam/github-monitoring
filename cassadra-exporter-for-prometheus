@@ -1,0 +1,16 @@
+install cassandra exporter on debian
+1- wget https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.3/
+# after download jar file we must move it to another cassandra jar file (can be differnt for every install) usually on $CASSANDRA_HOME/lib
+2-mv jmx_prometheus_javaagent-0.3.0.jar /home/nava/apache-cassandra-3.11.2/lib/
+# then we must config jmx exporter # so we must go to cassandra install path 
+3-cd /home/nava/apache-cassandra-3.11.2/conf
+4-vi jmx_exporter.yml
+ 
+#####################prometheus jmx #############
+JVM_OPTS="$JVM_OPTS -javaagent:$CASSANDRA_HOME/lib/jmx_prometheus_javaagent-0.3.0.jar=7070:/home/nava/apache-cassandra-3.11.2/conf/jmx_exporter.yml"
+
+5-systemctl restart cassandra
+
+
+# resource (https://www.cloudwalker.io/2020/05/17/monitoring-cassandra-with-prometheus/#Introduction)
+
