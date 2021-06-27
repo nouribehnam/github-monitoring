@@ -1,0 +1,12 @@
+[Unit]
+Description=sms-proxy
+After=network.target
+
+[Service]
+User=root
+Group=root
+Type=simple
+ExecStart=/usr/local/bin/notif
+
+[Install]
+WantedBy=multi-user.target
